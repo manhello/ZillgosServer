@@ -3,8 +3,10 @@
  * - Green/black neon theme with animated background
  * - Glass-morphism hero section
  * - Background animation ONLY behind Hero + Featured Work
- * - YouTube embeds via youtube-nocookie.com (no autoplay prompts)
+ * - MP4 video embeds with custom player
  */
+
+import avatarImg from "@assets/oooo_1761424443429.jpg";
 
 const COLORS = {
   neon: "#00FF00",
@@ -32,7 +34,9 @@ export default function Home() {
         {/* Header */}
         <header style={styles.header}>
           <div style={styles.brandLeft}>
-            <div style={styles.brandMark} data-testid="brand-logo" />
+            <div style={styles.brandMark} data-testid="brand-logo">
+              <img src={avatarImg} alt="Zillgo Avatar" style={styles.avatarImage} />
+            </div>
             <span style={styles.brandName} data-testid="brand-name">ZILLGO</span>
           </div>
 
@@ -57,14 +61,13 @@ export default function Home() {
 
               <div style={styles.ctaRow}>
                 <PrimaryButton href="#portfolio">View Portfolio</PrimaryButton>
-                <a href="#merch" style={styles.ghostBtn} data-testid="button-merch">Merch</a>
               </div>
             </div>
 
-            {/* Hero Video (embed) */}
-            <ResponsiveYouTube
-              title="Can 10 ANIMATORS Make an ANIMATION Without Communicating?"
-              id="MT-TRn_92tw"
+            {/* Hero Video */}
+            <VideoPlayer
+              src="/attached_assets/intro_1761424405396.mp4"
+              title="Intro Video"
             />
           </div>
         </section>
@@ -73,17 +76,17 @@ export default function Home() {
         <section id="portfolio" style={styles.section}>
           <h2 style={styles.h2} data-testid="text-portfolio-heading">Featured Work</h2>
           <div style={styles.grid3} className="portfolio-grid">
-            <ResponsiveYouTube
-              title="Animating Strangers Avatars on ROBLOX!"
-              id="AJcH0A5DL0I"
+            <VideoPlayer
+              src="/attached_assets/break_1761424385634.mp4"
+              title="Break"
             />
-            <ResponsiveYouTube
-              title="ROBLOX: Remix Revolution [Roblox Animation Collab]"
-              id="Pp8mRzsoWic"
+            <VideoPlayer
+              src="/attached_assets/commbaseketball_zerp_1761424396275.mp4"
+              title="Comm Basketball"
             />
-            <ResponsiveYouTube
-              title="This Game Lets You Animate on MOBILE?!"
-              id="Dq2Wc7tU-PA"
+            <VideoPlayer
+              src="/attached_assets/confes_ur_love_1761424400469.mp4"
+              title="Confess Your Love"
             />
           </div>
         </section>
@@ -96,13 +99,37 @@ export default function Home() {
         <div style={styles.cardOnSolid}>
           <div style={styles.contactGrid}>
             <div>
-              <h3 style={styles.h3} data-testid="text-business-inquiries">Business Inquiries</h3>
-              <p style={styles.bodyText} data-testid="text-email">brand@zillgo.gg</p>
+              <h3 style={styles.h3} data-testid="text-business-inquiries">Discord</h3>
+              <p style={styles.bodyText} data-testid="text-discord">zillgo</p>
+              <a 
+                href="https://discord.gg/JPDXQcg7" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={styles.discordLink}
+                data-testid="link-discord-server"
+              >
+                Join Discord Server
+              </a>
             </div>
             <div style={styles.socialRow}>
-              <a href="#" style={styles.ghostBtn} data-testid="link-youtube">YouTube</a>
-              <a href="#" style={styles.ghostBtn} data-testid="link-twitter">Twitter</a>
-              <a href="#" style={styles.ghostBtn} data-testid="link-instagram">Instagram</a>
+              <a 
+                href="https://www.youtube.com/@Zillgo" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={styles.ghostBtn} 
+                data-testid="link-youtube"
+              >
+                YouTube
+              </a>
+              <a 
+                href="https://x.com/Zillgo_Z" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={styles.ghostBtn} 
+                data-testid="link-twitter"
+              >
+                Twitter
+              </a>
             </div>
           </div>
         </div>
@@ -121,18 +148,20 @@ export default function Home() {
 
 /* ---------- Components ---------- */
 
-function ResponsiveYouTube({ id, title }: { id: string; title: string }) {
+function VideoPlayer({ src, title }: { src: string; title: string }) {
   return (
-    <div style={styles.videoWrap} data-testid={`video-${id}`}>
-      <iframe
+    <div style={styles.videoWrap} data-testid={`video-${title.toLowerCase().replace(/\s+/g, '-')}`}>
+      <video
+        style={styles.video}
+        controls
+        preload="metadata"
+        loop
+        playsInline
         title={title}
-        src={`https://www.youtube-nocookie.com/embed/${id}`}
-        style={styles.iframe}
-        loading="lazy"
-        referrerPolicy="strict-origin-when-cross-origin"
-        allow="encrypted-media; picture-in-picture; web-share"
-        allowFullScreen
-      />
+      >
+        <source src={src} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
     </div>
   );
 }
@@ -219,6 +248,14 @@ const styles = {
     borderRadius: 12,
     background: `linear-gradient(135deg, ${COLORS.neon}, ${COLORS.lime})`,
     boxShadow: "0 0 20px rgba(0,255,0,0.25)",
+    overflow: "hidden" as const,
+    position: "relative" as const,
+  },
+  avatarImage: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover" as const,
+    display: "block",
   },
   brandName: {
     fontWeight: 800,
@@ -346,7 +383,15 @@ const styles = {
     fontWeight: 700,
     color: "#8bff8b",
   },
-  bodyText: { margin: "4px 0 0", color: "#a9ffb0" },
+  bodyText: { margin: "4px 0 8px", color: "#a9ffb0" },
+  discordLink: {
+    display: "inline-block",
+    color: "#8bff8b",
+    textDecoration: "none",
+    fontSize: 14,
+    borderBottom: "1px solid rgba(0,255,0,0.4)",
+    paddingBottom: 2,
+  },
 
   grid3: {
     display: "grid",
@@ -364,12 +409,13 @@ const styles = {
     boxShadow: "0 10px 30px rgba(0,0,0,0.35)",
     background: "rgba(0,0,0,0.7)",
   },
-  iframe: {
+  video: {
     position: "absolute" as const,
     inset: 0,
     width: "100%",
     height: "100%",
     border: "0",
+    objectFit: "cover" as const,
   },
 
   cardOnSolid: {
