@@ -133,7 +133,7 @@ export default function Home() {
                 Business Inquiries
               </h3>
               <p style={styles.bodyText} data-testid="text-discord">
-                @zillgo
+                @zillgo on Discord
               </p>
             </div>
             <div style={styles.socialRow}>
