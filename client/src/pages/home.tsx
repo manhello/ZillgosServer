@@ -3,10 +3,8 @@
  * - Green/black neon theme with animated background
  * - Glass-morphism hero section
  * - Background animation ONLY behind Hero + Featured Work
- * - MP4 video embeds with custom player
+ * - YouTube embeds via youtube-nocookie.com (no autoplay prompts)
  */
-
-import avatarImg from "@assets/oooo_1761424443429.jpg";
 
 const COLORS = {
   neon: "#00FF00",
@@ -16,9 +14,19 @@ const COLORS = {
   dark: "#0a0a0a",
 };
 
-function PrimaryButton({ href, children }: { href: string; children: React.ReactNode }) {
+function PrimaryButton({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
   return (
-    <a href={href} style={styles.primaryBtn} data-testid={`button-${href.replace('#', '')}`}>
+    <a
+      href={href}
+      style={styles.primaryBtn}
+      data-testid={`button-${href.replace("#", "")}`}
+    >
       {children}
     </a>
   );
@@ -34,16 +42,30 @@ export default function Home() {
         {/* Header */}
         <header style={styles.header}>
           <div style={styles.brandLeft}>
-            <div style={styles.brandMark} data-testid="brand-logo">
-              <img src={avatarImg} alt="Zillgo Avatar" style={styles.avatarImage} />
-            </div>
-            <span style={styles.brandName} data-testid="brand-name">ZILLGO</span>
+            <div style={styles.brandMark} data-testid="brand-logo" />
+            <span style={styles.brandName} data-testid="brand-name">
+              ZILLGO
+            </span>
           </div>
 
           <nav style={styles.nav}>
-            <a style={styles.navLink} href="#portfolio" data-testid="link-portfolio">Portfolio</a>
-            <a style={styles.navLink} href="#about" data-testid="link-about">About</a>
-            <a style={styles.navLink} href="#contact" data-testid="link-contact">Contact</a>
+            <a
+              style={styles.navLink}
+              href="#portfolio"
+              data-testid="link-portfolio"
+            >
+              Portfolio
+            </a>
+            <a style={styles.navLink} href="#about" data-testid="link-about">
+              About
+            </a>
+            <a
+              style={styles.navLink}
+              href="#contact"
+              data-testid="link-contact"
+            >
+              Contact
+            </a>
           </nav>
 
           <PrimaryButton href="#contact">Contact</PrimaryButton>
@@ -55,38 +77,44 @@ export default function Home() {
             <div style={styles.heroCard}>
               <h1 style={styles.title} data-testid="text-hero-title">
                 ZILLGO
-                <span style={styles.subtitle} data-testid="text-hero-subtitle">Official Website</span>
+                <span style={styles.subtitle} data-testid="text-hero-subtitle">
+                  Portfolio
+                </span>
               </h1>
-              <p style={styles.tagline} data-testid="text-tagline">That one shark mask kid.</p>
+              <p style={styles.tagline} data-testid="text-tagline">
+                That one shark mask kid.
+              </p>
 
               <div style={styles.ctaRow}>
                 <PrimaryButton href="#portfolio">View Portfolio</PrimaryButton>
               </div>
             </div>
 
-            {/* Hero Video */}
-            <VideoPlayer
-              src="/attached_assets/intro_1761424405396.mp4"
-              title="Intro Video"
+            {/* Hero Video (embed) */}
+            <ResponsiveYouTube
+              title="Can 10 ANIMATORS Make an ANIMATION Without Communicating?"
+              id="MT-TRn_92tw"
             />
           </div>
         </section>
 
         {/* Portfolio */}
         <section id="portfolio" style={styles.section}>
-          <h2 style={styles.h2} data-testid="text-portfolio-heading">Featured Work</h2>
+          <h2 style={styles.h2} data-testid="text-portfolio-heading">
+            Featured Work
+          </h2>
           <div style={styles.grid3} className="portfolio-grid">
-            <VideoPlayer
-              src="/attached_assets/break_1761424385634.mp4"
-              title="Break"
+            <ResponsiveYouTube
+              title="Animating Strangers Avatars on ROBLOX!"
+              id="AJcH0A5DL0I"
             />
-            <VideoPlayer
-              src="/attached_assets/commbaseketball_zerp_1761424396275.mp4"
-              title="Comm Basketball"
+            <ResponsiveYouTube
+              title="ROBLOX: Remix Revolution [Roblox Animation Collab]"
+              id="Pp8mRzsoWic"
             />
-            <VideoPlayer
-              src="/attached_assets/confes_ur_love_1761424400469.mp4"
-              title="Confess Your Love"
+            <ResponsiveYouTube
+              title="This Game Lets You Animate on MOBILE?!"
+              id="Dq2Wc7tU-PA"
             />
           </div>
         </section>
@@ -95,40 +123,40 @@ export default function Home() {
 
       {/* Contact */}
       <section id="contact" style={styles.sectionOnSolid}>
-        <h2 style={styles.h2} data-testid="text-contact-heading">Contact</h2>
+        <h2 style={styles.h2} data-testid="text-contact-heading">
+          Contact
+        </h2>
         <div style={styles.cardOnSolid}>
           <div style={styles.contactGrid}>
             <div>
-              <h3 style={styles.h3} data-testid="text-business-inquiries">Discord</h3>
-              <p style={styles.bodyText} data-testid="text-discord">zillgo</p>
-              <a 
-                href="https://discord.gg/JPDXQcg7" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                style={styles.discordLink}
-                data-testid="link-discord-server"
-              >
-                Join Discord Server
-              </a>
+              <h3 style={styles.h3} data-testid="text-business-inquiries">
+                Business Inquiries
+              </h3>
+              <p style={styles.bodyText} data-testid="text-discord">
+                @zillgo
+              </p>
             </div>
             <div style={styles.socialRow}>
-              <a 
-                href="https://www.youtube.com/@Zillgo" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                style={styles.ghostBtn} 
+              <a
+                href="https://www.youtube.com/@Zillgo"
+                style={styles.ghostBtn}
                 data-testid="link-youtube"
               >
-                YouTube
+                Youtube
               </a>
-              <a 
-                href="https://x.com/Zillgo_Z" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                style={styles.ghostBtn} 
+              <a
+                href="https://x.com/Zillgo_Z"
+                style={styles.ghostBtn}
                 data-testid="link-twitter"
               >
                 Twitter
+              </a>
+              <a
+                href="https://discord.gg/JPDXQcg7"
+                style={styles.ghostBtn}
+                data-testid="link-disord"
+              >
+                Discord Server
               </a>
             </div>
           </div>
@@ -148,20 +176,18 @@ export default function Home() {
 
 /* ---------- Components ---------- */
 
-function VideoPlayer({ src, title }: { src: string; title: string }) {
+function ResponsiveYouTube({ id, title }: { id: string; title: string }) {
   return (
-    <div style={styles.videoWrap} data-testid={`video-${title.toLowerCase().replace(/\s+/g, '-')}`}>
-      <video
-        style={styles.video}
-        controls
-        preload="metadata"
-        loop
-        playsInline
+    <div style={styles.videoWrap} data-testid={`video-${id}`}>
+      <iframe
         title={title}
-      >
-        <source src={src} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+        src={`https://www.youtube-nocookie.com/embed/${id}`}
+        style={styles.iframe}
+        loading="lazy"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allow="encrypted-media; picture-in-picture; web-share"
+        allowFullScreen
+      />
     </div>
   );
 }
@@ -186,7 +212,15 @@ function MarqueeRow({ idx }: { idx: number }) {
   const opacity = 0.75 - idx * 0.08;
 
   return (
-    <div style={{ position: "absolute", top: `${idx * 13.5}%`, left: 0, right: 0, opacity }}>
+    <div
+      style={{
+        position: "absolute",
+        top: `${idx * 13.5}%`,
+        left: 0,
+        right: 0,
+        opacity,
+      }}
+    >
       <div
         className="zillgo-marquee"
         style={{
@@ -248,14 +282,6 @@ const styles = {
     borderRadius: 12,
     background: `linear-gradient(135deg, ${COLORS.neon}, ${COLORS.lime})`,
     boxShadow: "0 0 20px rgba(0,255,0,0.25)",
-    overflow: "hidden" as const,
-    position: "relative" as const,
-  },
-  avatarImage: {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover" as const,
-    display: "block",
   },
   brandName: {
     fontWeight: 800,
@@ -343,7 +369,12 @@ const styles = {
     marginTop: 16,
     color: "#a9ffb0",
   },
-  ctaRow: { display: "flex", gap: 12, marginTop: 24, flexWrap: "wrap" as const },
+  ctaRow: {
+    display: "flex",
+    gap: 12,
+    marginTop: 24,
+    flexWrap: "wrap" as const,
+  },
 
   primaryBtn: {
     display: "inline-flex",
@@ -383,15 +414,7 @@ const styles = {
     fontWeight: 700,
     color: "#8bff8b",
   },
-  bodyText: { margin: "4px 0 8px", color: "#a9ffb0" },
-  discordLink: {
-    display: "inline-block",
-    color: "#8bff8b",
-    textDecoration: "none",
-    fontSize: 14,
-    borderBottom: "1px solid rgba(0,255,0,0.4)",
-    paddingBottom: 2,
-  },
+  bodyText: { margin: "4px 0 0", color: "#a9ffb0" },
 
   grid3: {
     display: "grid",
@@ -409,13 +432,12 @@ const styles = {
     boxShadow: "0 10px 30px rgba(0,0,0,0.35)",
     background: "rgba(0,0,0,0.7)",
   },
-  video: {
+  iframe: {
     position: "absolute" as const,
     inset: 0,
     width: "100%",
     height: "100%",
     border: "0",
-    objectFit: "cover" as const,
   },
 
   cardOnSolid: {
